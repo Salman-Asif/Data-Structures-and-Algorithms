@@ -3,7 +3,7 @@ class Solution {
     List<List<Integer>> tList ;
     int length;
     
-    private void p(int[] nums, List<Integer> list, int[] pick) {
+    private void p(int[] nums, List<Integer> list, boolean[] pick) {
         
         if(list.size() == length) {
             tList.add(new ArrayList<>(list));
@@ -13,14 +13,14 @@ class Solution {
         
         for(int i=0;i<length;i++) {
             
-            if(pick[i]!=1) {
+            if(!pick[i]) {
                 list.add(nums[i]);
-                pick[i]=1;
+                pick[i]=true;
             
                 p(nums, list, pick);
                 
                 list.remove(list.size()-1);
-                pick[i] = -1;
+                pick[i] = false;
             }   
         }
     }
@@ -34,8 +34,8 @@ class Solution {
             return tList;
         }
         
-        int [] pick = new int[length];
-        Arrays.fill(pick,-1);
+        boolean [] pick = new boolean[length];
+        Arrays.fill(pick,false);
         
         p(nums, new ArrayList<>(), pick);
         
