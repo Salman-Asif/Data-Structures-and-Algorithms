@@ -21,7 +21,11 @@ class Solution {
                 }
             }
             
-            if(windowEnd - windowStart +1 > pLength) {
+            if(matched == pMap.size()) {
+                answer.add(windowStart);
+            }
+            
+            if(windowEnd >= pLength-1) {
                 leftChar = s.charAt(windowStart);
                 if(pMap.containsKey(leftChar)) {
                     if(pMap.get(leftChar) == 0) {
@@ -32,9 +36,7 @@ class Solution {
                 windowStart++;
             }
             
-            if(matched == pMap.size() && windowEnd-windowStart+1 == pLength) {
-                answer.add(windowStart);
-            }
+            
         }
         
         return answer;
