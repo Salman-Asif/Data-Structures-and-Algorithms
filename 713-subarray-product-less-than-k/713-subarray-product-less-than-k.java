@@ -4,27 +4,18 @@ class Solution {
        // System.out.println(nums.toString());
         int length = nums.length;
         int lastIndex = length-2;
-        int low,high,count=0, product=Integer.MAX_VALUE;
+        int start=0,end=0,product=1, count=0;
         
-        for(int i=0;i<length;i++) {
-            product = nums[i];
-            
-            if(product<k) {
-                count++;
+        while(start<=end && end<length) {
+            product=product*nums[end];
+            while(start<=end && product >= k) {
+                product=product/(nums[start]);
+                start++;
             }
-            else 
-                continue;
-            
-            for(int j=i+1;j<length;j++) {
-                product = product*nums[j];
-                
-                if(product<k) {
-                    count++;
-                }
-                else
-                    break;
-            }
+            count = count + end-start+1;
+            end++;
         }
+        
        
         return count;
     }
