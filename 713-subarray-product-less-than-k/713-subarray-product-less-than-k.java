@@ -6,7 +6,7 @@ class Solution {
         int lastIndex = length-2;
         int start=0,end=0,product=1, count=0;
         
-        while(start<=end && end<length) {
+        while(end<length) {
             product=product*nums[end];
             while(start<=end && product >= k) {
                 product=product/(nums[start]);
