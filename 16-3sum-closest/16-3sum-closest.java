@@ -23,7 +23,9 @@ class Solution {
                 ans = min < absDifference ? ans:sum;
                 min = Math.min(min, absDifference);
                 
-                if(sum > target) 
+                if(sum == target)
+                    break;
+                else if(sum > target) 
                     high--;
                 else
                     low++;
