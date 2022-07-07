@@ -15,10 +15,15 @@ class Solution {
         int a=n,b=n;
         do {
             a = calculateNext(a);
-            b = calculateNext(calculateNext(b));
-            if(a==1 || b==1)
+            b = calculateNext(b);
+            if(b==1)
+                return true;
+            b= calculateNext(b);
+            if(b==1)
                 return true;
         }while(a!=b);
+        
         return false;
+        
     }
 }
