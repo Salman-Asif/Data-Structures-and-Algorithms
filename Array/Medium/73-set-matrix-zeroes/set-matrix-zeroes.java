@@ -26,15 +26,8 @@ class Solution {
 
         for(int i=1;i<matrix.length;i++) {
             for(int j=1; j< matrix[0].length;j++) {
-                if(matrix[0][j]==0) {
-                    for(int col=0;col<matrix.length ; col++) {
-                        matrix[col][j] = 0;;
-                    }
-                }
-                if(matrix[i][0]==0) {
-                    for(int row=0;row<matrix[0].length; row++) {
-                        matrix[i][row] = 0;
-                    }
+                if(matrix[0][j]==0 || matrix[i][0]==0) {
+                    matrix[i][j] = 0;  
                 }
             }
         }
