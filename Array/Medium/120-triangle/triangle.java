@@ -22,6 +22,45 @@ class Solution {
         return result;
     }
 
+    private int minTotalTable(List<List<Integer>> triangle) {
+        List<List<Integer>> dp = new ArrayList<>();
+        for(int i=0;i<rows;i++) {
+            dp.add(new ArrayList<>());
+        }
+
+        dp.get(0).add(triangle.get(0).get(0));
+
+        for(int i=1;i<rows;i++) {
+            int rowSize = triangle.get(i).size();
+            for(int j=0;j < rowSize; j++) {
+                if(j==0) {
+                    dp.get(i).add(
+                        triangle.get(i).get(j) + dp.get(i-1).get(j)
+                    );
+                } else if (j < rowSize-1) {
+                    //last element in each row wont have corresponding (i-1, j) ,handled in else
+                    dp.get(i).add(
+                        triangle.get(i).get(j) +
+                        Math.min(dp.get(i-1).get(j) , dp.get(i-1).get(j-1))
+                    );
+                } else {
+                    dp.get(i).add(triangle.get(i).get(j) + dp.get(i-1).get(j-1));
+                }
+                
+            }
+        }
+
+
+
+        int minValue = Integer.MAX_VALUE;
+
+        for(int i=0; i<triangle.get(rows-1).size(); i++) {
+            minValue = Math.min(minValue, dp.get(rows-1).get(i));
+        }
+        
+        return minValue;
+    }
+
     public int minimumTotal(List<List<Integer>> triangle) {
         //cant use greedy since inital can be small later can be very large
         //so try all possible but we can save upto prev row sum, so dp 
@@ -29,6 +68,7 @@ class Solution {
         if(triangle.size() == 1 && triangle.get(0).size() == 1) return triangle.get(0).get(0);
 
         rows = triangle.size();
-        return minTotal(0, 0, triangle);
+        //return minTotal(0, 0, triangle);
+        return minTotalTable(triangle);
     }
 }
